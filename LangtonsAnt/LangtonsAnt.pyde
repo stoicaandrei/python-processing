@@ -11,11 +11,11 @@ ANTLEFT = 3;
 
 def setup():
     size(1000, 1000)
-    global rectOnLine, arr, antPos
+    global rectOnLine, arr, x, y
     rectOnLine = width / rectSize
     arr = [[0 for i in range(rectOnLine)] for j in range(rectOnLine)]
-    antPos = (rectOnLine / 2, rectOnLine / 2)
-    center = rectOnLine / 2
+    x = rectOnLine / 2
+    y = rectOnLine / 2
     
     for i in range(rectOnLine):
         for j in range(rectOnLine):
