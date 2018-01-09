@@ -1,12 +1,16 @@
 import random
 
 dir, rectSize, rectOnLine, arr = 0, 2, 0, 0
-antPos = 0
+x, y = 0, 0
 antDir = 0
-name = ['Up', 'Right', 'Down', 'Left']
+
+ANTUP = 0;
+ANTRIGHT = 1;
+ANTDOWN = 2;
+ANTLEFT = 3;
 
 def setup():
-    size(1000, 600)
+    size(1000, 1000)
     global rectOnLine, arr, antPos
     rectOnLine = width / rectSize
     arr = [[0 for i in range(rectOnLine)] for j in range(rectOnLine)]
@@ -15,47 +19,52 @@ def setup():
     
     for i in range(rectOnLine):
         for j in range(rectOnLine):
-            #stroke(255)
+            stroke(0)
             fill(255)
             rect(i * rectSize, j * rectSize, rectSize, rectSize)
+            
+def TurnRight():
+    global antDir
+    antDir += 1
+    if antDir > ANTLEFT:
+        antDir = ANTUP
+
+def TurnLeft():
+    global antDir
+    antDir -= 1
+    if antDir < ANTUP:
+        antDir = ANTLEFT
+        
+def MoveForward():
+    global x, y, arr
     
+    arr[x][y] = not arr[x][y]
+    stroke(0)
+    fill(255)
+    if arr[x][y]:
+        fill(0)
+    rect(x * rectSize, y * rectSize, rectSize, rectSize)
+    
+    if antDir == ANTUP:
+        y -= 1
+    elif antDir == ANTRIGHT:
+        x += 1
+    elif antDir == ANTDOWN:
+        y += 1
+    else:
+        x -= 1
+        
+    if x == rectOnLine or x == -1 or y == rectOnLine or y == -1:
+        x = random.randrange(0, rectOnLine)
+        y = random.randrange(0, rectOnLine)
+                    
 def draw():
-    global antPos, arr, antDir
-    
-    for i in range(10000):
-        x, y = antPos
+    for i in range(10):
+        MoveForward()
         if arr[x][y]:
-            antDir -= 1
+            TurnLeft()
         else:
-            antDir += 1
-            
-        if antDir < 0:
-            antDir = 3
+            TurnRight()
         
-        if antDir > 3:
-            antDir = 0
-        
-        #stroke(255)
-        arr[x][y] = not arr[x][y]
-        if arr[x][y]:
-            fill(0)
-        else:
-            fill(255)
-        rect(x * rectSize, y * rectSize, rectSize, rectSize)
-        
-        if antDir == 0:
-            y -= 1
-        elif antDir == 1:
-            x += 1
-        elif antDir == 2:
-            y += 1
-        else:
-            x -= 1
-            
-        if x == rectOnLine or x == -1 or y == rectOnLine or y == -1:
-            x = random.randrange(0, rectOnLine)
-            y = random.randrange(0, rectOnLine)
-        
-        antPos = (x, y)
     
     
