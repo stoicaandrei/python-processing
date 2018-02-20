@@ -39,8 +39,8 @@ def draw():
     
     t = 0
     while (t < 2*PI):
-        x = abs(cos(t))**(2/n) * a * sgn(cos(t)) * r
-        y = abs(sin(t))**(2/n) * b * sgn(sin(t)) * r
+        x = abs(cos(t))**(2.0/n) * a * sgn(cos(t)) * r
+        y = abs(sin(t))**(2.0/n) * b * sgn(sin(t)) * r
         vertex(x,y)
         
         t += 0.1
