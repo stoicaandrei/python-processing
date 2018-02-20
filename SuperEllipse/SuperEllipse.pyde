@@ -2,6 +2,7 @@
 def setup():
     size(500,500)
     background(255)
+    colorMode(HSB)
     
 a = 1
 b = 1
@@ -23,9 +24,8 @@ def draw():
     translate(width/2, height/2)
     
     background(255)
-    
-    noFill()
-    stroke(0)
+    fill(map(n, 0, 5, 0, 360), 255, 255)
+    noStroke()
     beginShape()
     
     if not back:
